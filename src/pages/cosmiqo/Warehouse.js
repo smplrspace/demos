@@ -73,7 +73,7 @@ const RoomAvailability = () => {
   }, [space])
 
   return (
-    <div style={{ width: '100%', maxWidth: 800, margin: '0 auto' }}>
+    <div style={{ width: '100%', margin: '0 auto' }}>
       <Viewer onReady={onReady} />
     </div>
   )

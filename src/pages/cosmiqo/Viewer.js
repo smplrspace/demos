@@ -2,14 +2,14 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import useSmplrJs from '../../../hooks/useSmplrJs'
+import useSmplrJs from '../../hooks/useSmplrJs'
 
 const Viewer = memo(({ onReady }) => {
   useSmplrJs({ onLoad })
 
   function onLoad () {
     const space = new smplr.Space({
-      spaceId: 'edb2ebaa-47ea-4e54-af0d-cf543328bdb0',
+      spaceId: '7ea60e49-619f-4c66-b9c9-d51869478d30',
       spaceToken: 'X',
       containerId: 'smplr-container'
     })

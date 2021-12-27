@@ -6,27 +6,22 @@ const darkCodeTheme = require('prism-react-renderer/themes/vsDark')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Smplrspace docs',
-  tagline:
-    'Learn how to embed our viewer with smplr.js and access the API reference',
-  url: 'https://docs.smplrspace.com',
+  title: 'Smplrspace demos',
+  tagline: 'Private access demos and proof of concepts for our clients',
+  url: 'https://demos.smplrspace.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'smplrspace',
-  projectName: 'docs',
+  projectName: 'demos',
 
   presets: [
     [
       '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          routeBasePath: '/',
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/smplrspace/docs/edit/main/'
-        },
+        docs: false,
         blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css')
@@ -40,10 +35,11 @@ const config = {
     ({
       image: 'img/og-image.jpg',
       colorMode: {
-        respectPrefersColorScheme: true
+        defaultMode: 'light',
+        disableSwitch: true
       },
       navbar: {
-        title: 'Docs',
+        title: 'Demos',
         logo: {
           alt: 'Smplrspace logo',
           src: 'img/logo.svg',
@@ -51,23 +47,8 @@ const config = {
         },
         items: [
           {
-            href: '/',
-            label: 'Docs',
-            position: 'right'
-          },
-          {
-            href: '/examples',
-            label: 'Examples',
-            position: 'right'
-          },
-          {
             href: 'https://www.smplrspace.com',
-            label: 'Homepage',
-            position: 'right'
-          },
-          {
-            href: 'https://github.com/smplrspace/docs',
-            label: 'GitHub',
+            label: 'Visit Smplrspace website',
             position: 'right'
           }
         ]
@@ -81,25 +62,12 @@ const config = {
         darkTheme: darkCodeTheme
       },
       fathomAnalytics: {
-        siteId: 'EYOYVBOL',
+        siteId: 'FUKCMVQX',
         customDomain: 'https://llama.smplrspace.com'
       }
     }),
 
-  plugins: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        hashed: true,
-        indexDocs: true,
-        indexBlog: false,
-        indexPages: false,
-        docsRouteBasePath: '/',
-        highlightSearchTermsOnTargetPage: true
-      }
-    ],
-    require.resolve('docusaurus-plugin-fathom')
-  ]
+  plugins: [require.resolve('docusaurus-plugin-fathom')]
 }
 
 module.exports = config
