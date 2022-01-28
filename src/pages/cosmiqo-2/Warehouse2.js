@@ -16,23 +16,23 @@ const addCoordinates = ({ padding = 0 } = {}) => e => ({
   coordinates: [
     {
       levelIndex: 0,
-      x: e.x - padding,
-      z: e.y - padding
+      x: e.sx - padding,
+      z: e.sz - padding
     },
     {
       levelIndex: 0,
-      x: e.x + e.width + padding,
-      z: e.y - padding
+      x: e.sx + e.sw + padding,
+      z: e.sz - padding
     },
     {
       levelIndex: 0,
-      x: e.x + e.width + padding,
-      z: e.y + e.depth + padding
+      x: e.sx + e.sw + padding,
+      z: e.sz + e.sd + padding
     },
     {
       levelIndex: 0,
-      x: e.x - padding,
-      z: e.y + e.depth + padding
+      x: e.sx - padding,
+      z: e.sz + e.sd + padding
     }
   ]
 })
@@ -53,9 +53,9 @@ const RoomAvailability = () => {
       id: 'items',
       type: 'polygon',
       data: items,
-      baseHeight: d => d.z,
-      height: d => d.height,
-      tooltip: d => `Item ${d.item}`,
+      baseHeight: d => d.sy,
+      height: d => d.sh,
+      tooltip: d => `Bin: ${d.bin} - Item: ${d.item}`,
       color: d => d.color
     })
     return () => {
