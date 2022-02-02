@@ -124,7 +124,7 @@ const RoomAvailability = () => {
           `Bin: ${d.bin} - ${numeral(d.percentUtilised).format(
             '0.00%'
           )} utilised`,
-        color: '#3aa655'
+        color: d => (d.percentUtilised >= 0.5 ? '#3aa655' : '#cd4343')
       })
       return () => {
         space.removeDataLayer('occupancy')
