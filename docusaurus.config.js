@@ -60,14 +60,16 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme
-      },
-      fathomAnalytics: {
-        siteId: 'FUKCMVQX',
-        customDomain: 'https://llama.smplrspace.com'
       }
     }),
 
-  plugins: [require.resolve('docusaurus-plugin-fathom')]
+  scripts: [
+    {
+      src: 'https://twentyfour-handsome.smplrspace.com/script.js',
+      'data-site': 'FUKCMVQX',
+      defer: true
+    }
+  ]
 }
 
 module.exports = config
