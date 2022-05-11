@@ -6,8 +6,8 @@ import numeral from 'numeral'
 import { evolve, add, map, range } from 'ramda'
 
 import Viewer from './Viewer'
-import { desks, rooms, wayfindingPath, wifiPoints, floorplan } from './data'
-import { splitPolyline } from './utils'
+import { desks, rooms, wayfindingPath, wifiPoints, floorplan } from './_data'
+import { splitPolyline } from './_utils'
 
 const SPACE_ID = 'ac662f1b-bd0f-4de2-860f-510fa2f90d86'
 const GROUND_SPACE_ID = 'd9a06a4e-10ce-4acc-9ade-01120d02d29a'
