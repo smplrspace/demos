@@ -649,3 +649,24 @@ export const floorplan = [
     z: -5.481282912358092
   }
 ]
+
+export const initialDefectReports = [
+  {
+    title: 'Electrical plug not working',
+    position: {
+      levelIndex: 0,
+      x: 19.325511775077977,
+      z: -21.696878694500377,
+      elevation: 0.7020000024791813
+    }
+  },
+  {
+    title: 'Door scratches the ground',
+    position: {
+      levelIndex: 0,
+      x: 36.942442155686,
+      z: -20.588911145883763,
+      elevation: 0.07490703150274669
+    }
+  }
+]

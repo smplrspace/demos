@@ -1,12 +1,19 @@
 /* global smplr */
 import React, { useRef, useState, useEffect } from 'react'
-import { Group, Button } from '@mantine/core'
+import { Group, Button, Modal, Input } from '@mantine/core'
 import chroma from 'chroma-js'
 import numeral from 'numeral'
 import { evolve, add, map, range } from 'ramda'
 
 import Viewer from './Viewer'
-import { desks, rooms, wayfindingPath, wifiPoints, floorplan } from './_data'
+import {
+  desks,
+  rooms,
+  wayfindingPath,
+  wifiPoints,
+  floorplan,
+  initialDefectReports
+} from './_data'
 import { splitPolyline } from './_utils'
 
 const SPACE_ID = 'ac662f1b-bd0f-4de2-860f-510fa2f90d86'
@@ -17,15 +24,19 @@ const USECASES = [
   'Wayfinding',
   'Occupancy',
   'Device management',
+  'Defect reports',
   'Commercial leasing'
 ]
-const DEFAULT_INDEX = 3
+const DEFAULT_INDEX = 4
 
 const Showreel = () => {
   const spaceRef = useRef()
 
   const [spaceReady, setSpaceReady] = useState(null)
   const [usecase, setUsecase] = useState(USECASES[DEFAULT_INDEX])
+  const [defectReports, setDefectReports] = useState(initialDefectReports)
+  const [defectModalOpened, setDefectModalOpened] = useState(false)
+  const [newReport, setNewReport] = useState({ title: '' })
 
   const renderSpace = ({ spaceId, preview }) => {
     setSpaceReady(null)
@@ -99,9 +110,6 @@ const Showreel = () => {
       })
     }
     if (usecase === 'Device management') {
-      // spaceRef.current.enablePickingMode({
-      //   onPick: console.log
-      // })
       spaceRef.current.addDataLayer({
         id: 'wifi-points',
         type: 'point',
@@ -127,6 +135,30 @@ const Showreel = () => {
         },
         onHoverOut: () => spaceRef.current.removeDataLayer('wifi-range')
       })
+    }
+    let keyUpHandler
+    if (usecase === 'Defect reports') {
+      spaceRef.current.addDataLayer({
+        id: 'defects',
+        type: 'point',
+        data: defectReports,
+        tooltip: d => d.title,
+        color: '#973bed',
+        anchor: 'bottom',
+        diameter: 0.8
+      })
+      keyUpHandler = e => {
+        if (e.key === 'a') {
+          spaceRef.current.enablePickingMode({
+            onPick: ({ coordinates }) => {
+              setNewReport({ title: '', position: coordinates })
+              setDefectModalOpened(true)
+              spaceRef.current.disablePickingMode()
+            }
+          })
+        }
+      }
+      window.addEventListener('keyup', keyUpHandler)
     }
     if (usecase === 'Commercial leasing') {
       const colorScheme = {
@@ -154,14 +186,16 @@ const Showreel = () => {
       })
     }
     return () => {
+      keyUpHandler && window.removeEventListener('keyup', keyUpHandler)
       spaceRef.current.removeDataLayer('desks')
       spaceRef.current.removeDataLayer('rooms')
       spaceRef.current.removeDataLayer('directions')
       spaceRef.current.removeDataLayer('wifi-points')
       spaceRef.current.removeDataLayer('wifi-range')
+      spaceRef.current.removeDataLayer('defects')
       spaceRef.current.removeDataLayer('levels')
     }
-  }, [usecase, spaceReady])
+  }, [usecase, spaceReady, defectReports])
 
   return (
     <div style={{ width: '100%', maxWidth: '1024px', margin: '0 auto' }}>
@@ -179,6 +213,31 @@ const Showreel = () => {
       <Viewer
         onLoad={() => renderSpace({ spaceId: SPACE_ID, preview: false })}
       />
+      <Modal
+        opened={defectModalOpened}
+        onClose={() => setDefectModalOpened(false)}
+        title="What's the problem?"
+      >
+        <Input
+          data-autofocus
+          value={newReport.title}
+          onChange={e => setNewReport({ ...newReport, title: e.target.value })}
+        />
+        <Group mt='xs'>
+          <Button variant='outline' onClick={() => setDefectModalOpened(false)}>
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              setDefectReports([...defectReports, newReport])
+              setNewReport({ title: '' })
+              setDefectModalOpened(false)
+            }}
+          >
+            Post report
+          </Button>
+        </Group>
+      </Modal>
     </div>
   )
 }
