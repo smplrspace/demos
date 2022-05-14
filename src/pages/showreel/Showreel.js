@@ -12,7 +12,8 @@ import {
   wayfindingPath,
   wifiPoints,
   floorplan,
-  initialDefectReports
+  initialDefectReports,
+  iotData
 } from './_data'
 import { splitPolyline } from './_utils'
 
@@ -23,11 +24,12 @@ const USECASES = [
   'Desk booking',
   'Wayfinding',
   'Occupancy',
+  'IoT data',
   'Device management',
   'Defect reports',
   'Commercial leasing'
 ]
-const DEFAULT_INDEX = 4
+const DEFAULT_INDEX = 0
 
 const Showreel = () => {
   const spaceRef = useRef()
@@ -107,6 +109,35 @@ const Showreel = () => {
             .hex(),
         alpha: 0.8,
         height: 2.9
+      })
+    }
+    if (usecase === 'IoT data') {
+      // spaceRef.current.enablePickingMode({
+      //   onPick: console.log
+      // })
+      spaceRef.current.addDataLayer({
+        id: 'aq-bad',
+        type: 'icon',
+        data: iotData.filter(d => d.value < 50),
+        icon: {
+          url: '/img/examples/aq-bad.png',
+          width: 130,
+          height: 130
+        },
+        width: 2,
+        tooltip: d => `Air quality index: ${d.value}`
+      })
+      spaceRef.current.addDataLayer({
+        id: 'aq-good',
+        type: 'icon',
+        data: iotData.filter(d => d.value >= 50),
+        icon: {
+          url: '/img/examples/aq-good.png',
+          width: 130,
+          height: 130
+        },
+        width: 2,
+        tooltip: d => `Air quality index: ${d.value}`
       })
     }
     if (usecase === 'Device management') {
@@ -190,6 +221,8 @@ const Showreel = () => {
       spaceRef.current.removeDataLayer('desks')
       spaceRef.current.removeDataLayer('rooms')
       spaceRef.current.removeDataLayer('directions')
+      spaceRef.current.removeDataLayer('aq-bad')
+      spaceRef.current.removeDataLayer('aq-good')
       spaceRef.current.removeDataLayer('wifi-points')
       spaceRef.current.removeDataLayer('wifi-range')
       spaceRef.current.removeDataLayer('defects')

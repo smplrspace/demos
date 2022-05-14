@@ -670,3 +670,66 @@ export const initialDefectReports = [
     }
   }
 ]
+
+export const iotData = [
+  {
+    name: 'AQ-01',
+    value: 56,
+    position: {
+      levelIndex: 0,
+      x: 21.34601756780703,
+      z: -17.95842646460428,
+      elevation: 4
+    }
+  },
+  {
+    name: 'AQ-02',
+    value: 93,
+    position: {
+      levelIndex: 0,
+      x: 28.424709353183783,
+      z: -23.87375162489889,
+      elevation: 4
+    }
+  },
+  {
+    name: 'AQ-03',
+    value: 20,
+    position: {
+      levelIndex: 0,
+      x: 19.517878449583968,
+      z: -8.88693869683905,
+      elevation: 4
+    }
+  },
+  {
+    name: 'AQ-04',
+    value: 51,
+    position: {
+      levelIndex: 0,
+      x: 32.289232127673735,
+      z: -9.038624342181908,
+      elevation: 4
+    }
+  },
+  {
+    name: 'AQ-05',
+    value: 63,
+    position: {
+      levelIndex: 0,
+      x: 38.00784163285138,
+      z: -19.185290924304766,
+      elevation: 4
+    }
+  },
+  {
+    name: 'AQ-06',
+    value: 35,
+    position: {
+      levelIndex: 0,
+      x: 26.82387190034573,
+      z: -34.76004346413153,
+      elevation: 4
+    }
+  }
+]
