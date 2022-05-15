@@ -13,7 +13,8 @@ import {
   wifiPoints,
   floorplan,
   initialDefectReports,
-  iotData
+  iotData,
+  cameraPlacements
 } from './_data'
 import { splitPolyline } from './_utils'
 
@@ -29,7 +30,7 @@ const USECASES = [
   'Defect reports',
   'Commercial leasing'
 ]
-const DEFAULT_INDEX = 0
+const DEFAULT_INDEX = 2
 
 const Showreel = () => {
   const spaceRef = useRef()
@@ -40,7 +41,7 @@ const Showreel = () => {
   const [defectModalOpened, setDefectModalOpened] = useState(false)
   const [newReport, setNewReport] = useState({ title: '' })
 
-  const renderSpace = ({ spaceId, preview }) => {
+  const renderSpace = ({ spaceId, ...options }) => {
     setSpaceReady(null)
     spaceRef.current && spaceRef.current.remove()
     spaceRef.current = new smplr.Space({
@@ -48,9 +49,65 @@ const Showreel = () => {
       spaceToken: 'X',
       containerId: 'smplr-container'
     })
+    window.space = spaceRef.current
     spaceRef.current.startViewer({
-      preview,
-      onReady: () => setSpaceReady(spaceId),
+      ...options,
+      onReady: () => {
+        setSpaceReady(spaceId)
+        window.addEventListener('keyup', e => {
+          switch (e.key) {
+            case '0':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.overview,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+            case 'd':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.desks,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+            case 'w':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.wayfinding,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+            case 'o':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.occupancy,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+            case 'r':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.reports,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+            case 'n':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.newReport,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+            case 'c':
+              spaceRef.current.setCameraPlacement({
+                ...cameraPlacements.commercial,
+                animate: true,
+                animationDuration: 0.8
+              })
+              break
+          }
+        })
+      },
       onError: error => console.error('Could not start viewer', error)
     })
   }
@@ -61,7 +118,12 @@ const Showreel = () => {
     }
     // render another space if required
     if (usecase === 'Commercial leasing' && spaceReady !== GROUND_SPACE_ID) {
-      renderSpace({ spaceId: GROUND_SPACE_ID, preview: false })
+      renderSpace({
+        spaceId: GROUND_SPACE_ID,
+        preview: false,
+        disableCameraControls: true,
+        cameraPlacement: cameraPlacements.commercial
+      })
       return
     }
     if (usecase !== 'Commercial leasing' && spaceReady === GROUND_SPACE_ID) {
@@ -247,6 +309,7 @@ const Showreel = () => {
         onLoad={() => renderSpace({ spaceId: SPACE_ID, preview: false })}
       />
       <Modal
+        styles={{ inner: { marginTop: 150 } }}
         opened={defectModalOpened}
         onClose={() => setDefectModalOpened(false)}
         title="What's the problem?"
