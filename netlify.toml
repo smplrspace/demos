@@ -1,4 +1,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self' *.smplrspace.com;"
+    Content-Security-Policy = "default-src 'self' *.smplrspace.com firebasestorage.googleapis.com;"
