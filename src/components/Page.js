@@ -52,7 +52,7 @@ function Page ({ children }) {
       <Head>
         <meta
           httpEquiv='Content-Security-Policy'
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' *.smplrspace.com; style-src 'self' 'unsafe-inline'; font-src 'self' *.smplrspace.com; img-src * data:; media-src * data:; connect-src *; worker-src 'self' blob:;"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' 'unsafe-eval' *.smplrspace.com; style-src 'self' 'unsafe-inline'; font-src 'self' *.smplrspace.com; img-src * data:; media-src * data:; connect-src *; worker-src 'self' blob:;"
         />
       </Head>
       <main className='container container--fluid margin-vert--lg'>
