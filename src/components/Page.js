@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Layout from '@theme/Layout'
 import { MantineProvider } from '@mantine/core'
 import useThemeContext from '@theme/hooks/useThemeContext'
-import Head from '@docusaurus/Head'
 
 function Page ({ children }) {
   const { isDarkTheme } = useThemeContext()
@@ -49,12 +48,6 @@ function Page ({ children }) {
         }
       }}
     >
-      <Head>
-        <meta
-          httpEquiv='Content-Security-Policy'
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' 'unsafe-eval' *.smplrspace.com; style-src 'self' 'unsafe-inline'; font-src 'self' *.smplrspace.com; img-src * data:; media-src * data:; connect-src *; worker-src 'self' blob:;"
-        />
-      </Head>
       <main className='container container--fluid margin-vert--lg'>
         {children}
       </main>
