@@ -18,7 +18,7 @@ import {
 } from './_data'
 import { splitPolyline } from './_utils'
 
-const SPACE_ID = 'ac662f1b-bd0f-4de2-860f-510fa2f90d86'
+const SPACE_ID = 'f438671f-9979-42c6-8338-05c0015abb2d'
 const GROUND_SPACE_ID = 'd9a06a4e-10ce-4acc-9ade-01120d02d29a'
 
 const USECASES = [
@@ -30,7 +30,7 @@ const USECASES = [
   'Defect reports',
   'Commercial leasing'
 ]
-const DEFAULT_INDEX = 2
+const DEFAULT_INDEX = 0
 
 const Showreel = () => {
   const spaceRef = useRef()
@@ -137,7 +137,7 @@ const Showreel = () => {
         type: 'furniture',
         data: desks,
         tooltip: d => `${d.name} - ${d.available ? 'free' : 'occupied'}`,
-        color: d => (d.available ? '#3aa655' : '#ff3f34')
+        color: d => (d.available ? '#41a75b' : '#fe493e')
       })
     }
     if (usecase === 'Wayfinding') {
