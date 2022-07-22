@@ -46,7 +46,7 @@ const Showreel = () => {
     spaceRef.current && spaceRef.current.remove()
     spaceRef.current = new smplr.Space({
       spaceId,
-      clientToken: 'pub_834fae5c46404eafb887a89c45f2a34c',
+      clientToken: 'pub_95f93f1b121844a7a7040ea9b6246e36',
       containerId: 'smplr-container'
     })
     window.space = spaceRef.current
