@@ -6,8 +6,8 @@ import Showreel from './Showreel'
 
 export default function () {
   return (
-    <Page title='[DEV] Showreel'>
-      <h1>[DEV] Showreel of use-cases</h1>
+    <Page title='[DEV ESM] Showreel'>
+      <h1>[DEV ESM] Showreel of use-cases</h1>
       <Showreel />
     </Page>
   )
