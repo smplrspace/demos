@@ -61,17 +61,7 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme
       }
-    }),
-
-  scripts: [
-    process.env.NODE_ENV === 'production'
-      ? {
-        src: 'https://twentyfour-handsome.smplrspace.com/script.js',
-        'data-site': 'FUKCMVQX',
-        defer: true
-      }
-      : null
-  ].filter(Boolean)
+    })
 }
 
 module.exports = config
