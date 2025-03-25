@@ -12,14 +12,6 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v2
-      - uses: sarisia/actions-status-discord@v1
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_DEV }}
-          notimestamp: true
-          nodetail: true
-          title: "Started: ${{ github.workflow}} - ${{ github.ref_name }}"
-          description: Triggered by ${{ github.actor }}
-          color: 0x50545b
       - name: Wait for Cloudflare Pages build
         uses: WalshyDev/cf-pages-await@v1
         with:
@@ -28,10 +20,3 @@ jobs:
           project: "demos"
           # write deplpyment status to github
           githubToken: ${{ secrets.PRIVATE_ACCESS_TOKEN_DEPLOYMENTS }}
-      - name: Send Discord notification
-        uses: sarisia/actions-status-discord@v1
-        if: always()
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_DEV }}
-          title: ${{ github.workflow}} - ${{ github.ref_name }}
-          notimestamp: true
